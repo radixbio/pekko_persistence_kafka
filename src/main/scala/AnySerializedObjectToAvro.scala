@@ -1,7 +1,7 @@
 package com.radix.shared.persistence
 
 import java.io.ByteArrayOutputStream
-import akka.serialization.Serialization
+import org.apache.pekko.serialization.Serialization
 import org.apache.avro.file.DataFileWriter
 import org.apache.avro.generic.{GenericDatumWriter, GenericRecord}
 import org.apache.avro.util.Utf8

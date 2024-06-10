@@ -1,29 +1,29 @@
 package com.radix.shared.persistence
 
-import akka.NotUsed
-import akka.actor.typed.ActorSystem
-import akka.actor.{ActorLogging, ActorRef}
-import akka.cluster.ddata.{DistributedData, GCounter, GCounterKey, SelfUniqueAddress}
-import akka.cluster.ddata.Replicator.{Get, GetSuccess, NotFound, ReadLocal, Update, UpdateFailure, UpdateSuccess, WriteLocal}
-import akka.kafka.Metadata.{EndOffsets, GetEndOffsets}
+import org.apache.pekko.NotUsed
+import org.apache.pekko.actor.typed.ActorSystem
+import org.apache.pekko.actor.{ActorLogging, ActorRef}
+import org.apache.pekko.cluster.ddata.{DistributedData, GCounter, GCounterKey, SelfUniqueAddress}
+import org.apache.pekko.cluster.ddata.Replicator.{Get, GetSuccess, NotFound, ReadLocal, Update, UpdateFailure, UpdateSuccess, WriteLocal}
+import org.apache.pekko.kafka.Metadata.{EndOffsets, GetEndOffsets}
 
 import scala.collection.immutable
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success, Try}
 import com.typesafe.config.Config
-import akka.kafka.{CommitterSettings, ConsumerSettings, KafkaConsumerActor, ProducerMessage, ProducerSettings, Subscriptions}
-import akka.kafka.scaladsl.{Committer, Consumer, Producer}
-import akka.kafka.scaladsl.Consumer.DrainingControl
-import akka.persistence.{AtomicWrite, PersistentRepr}
-import akka.persistence.journal.{AsyncRecovery, AsyncWriteJournal}
-import akka.serialization.{Serialization, SerializationExtension}
-import akka.stream.Materializer
-import akka.stream.scaladsl.{Flow, Keep, Sink, Source}
+import org.apache.pekko.kafka.{CommitterSettings, ConsumerSettings, KafkaConsumerActor, ProducerMessage, ProducerSettings, Subscriptions}
+import org.apache.pekko.kafka.scaladsl.{Committer, Consumer, Producer}
+import org.apache.pekko.kafka.scaladsl.Consumer.DrainingControl
+import org.apache.pekko.persistence.{AtomicWrite, PersistentRepr}
+import org.apache.pekko.persistence.journal.{AsyncRecovery, AsyncWriteJournal}
+import org.apache.pekko.serialization.{Serialization, SerializationExtension}
+import org.apache.pekko.stream.Materializer
+import org.apache.pekko.stream.scaladsl.{Flow, Keep, Sink, Source}
 import io.confluent.kafka.serializers.{KafkaAvroDeserializer, KafkaAvroSerializer}
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.common.serialization.{Deserializer, Serializer, StringDeserializer, StringSerializer}
-import akka.pattern.ask
-import akka.util.Timeout
+import org.apache.pekko.pattern.ask
+import org.apache.pekko.util.Timeout
 import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.clients.consumer.{ConsumerConfig, RetriableCommitFailedException}
 import org.apache.kafka.common.TopicPartition
@@ -91,9 +91,9 @@ class KafkaJournal(cfg: Config) extends AsyncWriteJournal with AsyncRecovery wit
       .groupBy(localConfig.streamParallelism, _.persistenceId)
       .mapAsync(localConfig.streamParallelism)(atomicWrite =>
         Future {
-          val akkaRecords = atomicWrite.payload.toList
+          val pekkoRecords = atomicWrite.payload.toList
 
-          val kafkaObjects: List[Either[Throwable, (String, KafkaJournalKey, Object)]] = akkaRecords
+          val kafkaObjects: List[Either[Throwable, (String, KafkaJournalKey, Object)]] = pekkoRecords
             .map(record => {
               val topic = record.persistenceId + KafkaJournal.journalPostfix
 
@@ -102,7 +102,7 @@ class KafkaJournal(cfg: Config) extends AsyncWriteJournal with AsyncRecovery wit
                 case Failure(err)           => Left(err)
                 case Success((serIdO, obj)) =>
                   /* If the input object doesn't have a manifest (because it's a plain
-                   * String, Int, etc), Akka requires that the manifest be empty. It is
+                   * String, Int, etc), Pekko requires that the manifest be empty. It is
                    * assumed that if an object does not have a serializer ID, then it should
                    * not have a manifest.
                    */
@@ -241,7 +241,7 @@ class KafkaJournal(cfg: Config) extends AsyncWriteJournal with AsyncRecovery wit
   }
 
   override def asyncReplayMessages(persistenceId: String, fromSequenceNr: Long, toSequenceNr: Long, max: Long)(
-    recoveryCallback: akka.persistence.PersistentRepr => Unit
+    recoveryCallback: org.apache.pekko.persistence.PersistentRepr => Unit
   ): scala.concurrent.Future[Unit] = {
     val topic = persistenceId + KafkaJournal.journalPostfix
     val partition = new TopicPartition(topic, 0)

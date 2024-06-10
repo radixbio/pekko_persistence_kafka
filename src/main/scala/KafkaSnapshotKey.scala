@@ -1,6 +1,6 @@
 package com.radix.shared.persistence
 
-import akka.persistence.SnapshotMetadata
+import org.apache.pekko.persistence.SnapshotMetadata
 
 case class KafkaSnapshotKey(sequenceNr: Long, timestamp: Long) {
   override def toString: String =

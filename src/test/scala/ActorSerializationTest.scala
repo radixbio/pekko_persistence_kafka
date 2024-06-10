@@ -1,15 +1,15 @@
 package com.radix.shared.persistence.test
 
-import akka.NotUsed
-import akka.actor.{ActorRef => UActorRef, ActorSystem, ExtendedActorSystem}
-import akka.actor.typed.scaladsl.Behaviors
-import akka.actor.typed.{ActorRef, Behavior}
+import org.apache.pekko.NotUsed
+import org.apache.pekko.actor.{ActorRef => UActorRef, ActorSystem, ExtendedActorSystem}
+import org.apache.pekko.actor.typed.scaladsl.Behaviors
+import org.apache.pekko.actor.typed.{ActorRef, Behavior}
 import com.radix.shared.persistence.AvroSerializer
 import com.radix.shared.persistence.ActorRefSerializer._
-import akka.actor.testkit.typed.scaladsl.ScalaTestWithActorTestKit
-import akka.testkit.{TestKit, TestProbe}
-import akka.serialization.SerializationExtension
-import akka.actor.typed.scaladsl.adapter._
+import org.apache.pekko.actor.testkit.typed.scaladsl.ScalaTestWithActorTestKit
+import org.apache.pekko.testkit.{TestKit, TestProbe}
+import org.apache.pekko.serialization.SerializationExtension
+import org.apache.pekko.actor.typed.scaladsl.adapter._
 import com.typesafe.config.{Config, ConfigFactory}
 import org.scalatest.wordspec.AnyWordSpecLike
 import org.scalatest.matchers.should.Matchers
@@ -43,8 +43,8 @@ object UntypedEchoActor {
 
 class TypedActorSerializationSpec
     extends ScalaTestWithActorTestKit("""
-    |akka.actor.serializers.echo-serializer = "com.radix.shared.persistence.test.TypedEchoSerializer"
-    |akka.actor.serialization-bindings."com.radix.shared.persistence.test.TypedEchoActor$Echo" = "echo-serializer"
+    |pekko.actor.serializers.echo-serializer = "com.radix.shared.persistence.test.TypedEchoSerializer"
+    |pekko.actor.serialization-bindings."com.radix.shared.persistence.test.TypedEchoActor$Echo" = "echo-serializer"
     |""".stripMargin)
     with AnyWordSpecLike {
   "Typed ActorRefs must (de)serialize correctly" in {
@@ -72,8 +72,8 @@ class TypedActorSerializationSpec
 
 object UntypedActorSerializationSpec {
   val config: Config = ConfigFactory.parseString("""
-      |akka.actor.serializers.echo-serializer = "com.radix.shared.persistence.test.UntypedEchoSerializer"
-      |akka.actor.serialization-bindings."com.radix.shared.persistence.test.UntypedEchoActor$Echo" = "echo-serializer"
+      |pekko.actor.serializers.echo-serializer = "com.radix.shared.persistence.test.UntypedEchoSerializer"
+      |pekko.actor.serialization-bindings."com.radix.shared.persistence.test.UntypedEchoActor$Echo" = "echo-serializer"
       |""".stripMargin)
 }
 

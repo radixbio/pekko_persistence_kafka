@@ -158,7 +158,7 @@ object AutoSerializers {
       val easDependency = if (needsEas) {
         Set(
           ImportStatement(
-            "akka.actor",
+            "org.apache.pekko.actor",
             Set("ExtendedActorSystem"),
           ),
           ImportStatement(

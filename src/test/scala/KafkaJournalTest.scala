@@ -1,7 +1,7 @@
 package com.radix.shared.persistence.test
 
-import akka.persistence.CapabilityFlag
-import akka.persistence.journal.JournalSpec
+import org.apache.pekko.persistence.CapabilityFlag
+import org.apache.pekko.persistence.journal.JournalSpec
 import com.typesafe.config.{Config, ConfigFactory}
 import io.github.embeddedkafka.schemaregistry.{EmbeddedKafka, EmbeddedKafkaConfig}
 import scala.concurrent.Await
@@ -10,7 +10,7 @@ import scala.concurrent.duration._
 class KafkaJournalTest
     extends JournalSpec(
       ConfigFactory.load
-        .withValue("akka.remote.artery.canonical.port", ConfigFactory.parseString("{port: 2554}").getValue("port"))
+        .withValue("pekko.remote.artery.canonical.port", ConfigFactory.parseString("{port: 2554}").getValue("port"))
     )
     with EmbeddedKafka {
 

@@ -1,17 +1,17 @@
 package com.radix.shared.persistence
 
-import akka.NotUsed
-import akka.actor.ActorRef
-import akka.actor.typed.ActorSystem
-import akka.cluster.ddata.Replicator.{UpdateFailure, UpdateSuccess}
-import akka.kafka.Metadata.{EndOffsets, GetEndOffsets, ListTopics, Topics}
-import akka.kafka.{CommitterSettings, ConsumerSettings, KafkaConsumerActor, ProducerMessage, ProducerSettings, Subscriptions}
-import akka.kafka.scaladsl.{Consumer, Producer}
-import akka.persistence.{SelectedSnapshot, SnapshotMetadata, SnapshotSelectionCriteria}
-import akka.persistence.snapshot.SnapshotStore
-import akka.serialization.{Serialization, SerializationExtension}
-import akka.stream.Materializer
-import akka.stream.scaladsl.{Sink, Source}
+import org.apache.pekko.NotUsed
+import org.apache.pekko.actor.ActorRef
+import org.apache.pekko.actor.typed.ActorSystem
+import org.apache.pekko.cluster.ddata.Replicator.{UpdateFailure, UpdateSuccess}
+import org.apache.pekko.kafka.Metadata.{EndOffsets, GetEndOffsets, ListTopics, Topics}
+import org.apache.pekko.kafka.{CommitterSettings, ConsumerSettings, KafkaConsumerActor, ProducerMessage, ProducerSettings, Subscriptions}
+import org.apache.pekko.kafka.scaladsl.{Consumer, Producer}
+import org.apache.pekko.persistence.{SelectedSnapshot, SnapshotMetadata, SnapshotSelectionCriteria}
+import org.apache.pekko.persistence.snapshot.SnapshotStore
+import org.apache.pekko.serialization.{Serialization, SerializationExtension}
+import org.apache.pekko.stream.Materializer
+import org.apache.pekko.stream.scaladsl.{Sink, Source}
 import com.typesafe.config.Config
 import io.confluent.kafka.serializers.{KafkaAvroDeserializer, KafkaAvroSerializer}
 import org.apache.kafka.clients.producer.ProducerRecord
@@ -19,8 +19,8 @@ import org.apache.kafka.common.TopicPartition
 import org.apache.kafka.common.serialization.{Deserializer, Serializer, StringDeserializer, StringSerializer}
 
 import scala.collection.immutable.Seq
-import akka.pattern.ask
-import akka.util.Timeout
+import org.apache.pekko.pattern.ask
+import org.apache.pekko.util.Timeout
 
 import scala.concurrent.duration._
 import scala.concurrent.Future

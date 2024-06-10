@@ -2,7 +2,7 @@ package com.radix.shared.persistence
 
 import java.io.{ByteArrayOutputStream, NotSerializableException}
 
-import akka.serialization.SerializerWithStringManifest
+import org.apache.pekko.serialization.SerializerWithStringManifest
 import com.sksamuel.avro4s.{AvroInputStream, AvroOutputStream, AvroSchema, Decoder, Encoder, RecordFormat, SchemaFor}
 
 import scala.reflect.ClassTag
@@ -20,7 +20,7 @@ class AvroSerializer[T: SchemaFor: ClassTag: Decoder: Encoder]()(implicit ev: T 
 
   /**
    * Deserialize the array of bytes into an object of type [[T]]. Uses Avro binary format to deserialize.
-   * Used by Akka serialization.
+   * Used by Pekko serialization.
    * @param bytes bytes to deserialize
    * @param manifest manifest
    * @return deserialized object
@@ -54,7 +54,7 @@ class AvroSerializer[T: SchemaFor: ClassTag: Decoder: Encoder]()(implicit ev: T 
 
   /**
    * Serialize object to array of bytes using avro binary format.
-   * Used by Akka serialization.
+   * Used by Pekko serialization.
    * @param o object to serialize
    * @return array of bytes
    */

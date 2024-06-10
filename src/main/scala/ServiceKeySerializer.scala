@@ -2,11 +2,11 @@ package com.radix.shared.persistence
 
 import java.nio.charset.StandardCharsets
 
-import akka.actor.ExtendedActorSystem
-import akka.actor.typed.receptionist.ServiceKey
+import org.apache.pekko.actor.ExtendedActorSystem
+import org.apache.pekko.actor.typed.receptionist.ServiceKey
 import com.sksamuel.avro4s.{Decoder, Encoder, FieldMapper, SchemaFor}
 import org.apache.avro.{Schema, SchemaBuilder}
-import akka.serialization.SerializationExtension
+import org.apache.pekko.serialization.SerializationExtension
 
 import scala.reflect.ClassTag
 object ServiceKeySerializer {

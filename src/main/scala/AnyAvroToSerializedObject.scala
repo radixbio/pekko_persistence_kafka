@@ -1,6 +1,6 @@
 package com.radix.shared.persistence
 
-import akka.serialization.Serialization
+import org.apache.pekko.serialization.Serialization
 import org.apache.avro.file.{DataFileReader, SeekableByteArrayInput}
 import org.apache.avro.generic.{GenericDatumReader, GenericRecord, IndexedRecord}
 import org.apache.avro.io.DatumReader

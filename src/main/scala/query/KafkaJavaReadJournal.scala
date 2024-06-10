@@ -1,8 +1,8 @@
 package com.radix.shared.persistence.query
 
-import akka.NotUsed
-import akka.persistence.query.javadsl
-import akka.stream.javadsl.Source
+import org.apache.pekko.NotUsed
+import org.apache.pekko.persistence.query.javadsl
+import org.apache.pekko.stream.javadsl.Source
 
 class KafkaJavaReadJournal(kafkaScalaReadJournal: KafkaScalaReadJournal)
     extends javadsl.ReadJournal

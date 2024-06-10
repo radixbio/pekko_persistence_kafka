@@ -2,7 +2,7 @@ package com.radix.shared.persistence
 
 import java.util.UUID
 
-import akka.persistence.PersistentRepr
+import org.apache.pekko.persistence.PersistentRepr
 
 case class KafkaJournalKey(sequenceNr: Long, writerUuid: UUID, manifest: String, serializerId: Int) {
   override def toString: String =

@@ -1,7 +1,7 @@
 package com.radix.shared.persistence.test
 
-import akka.persistence.CapabilityFlag
-import akka.persistence.snapshot.SnapshotStoreSpec
+import org.apache.pekko.persistence.CapabilityFlag
+import org.apache.pekko.persistence.snapshot.SnapshotStoreSpec
 import com.typesafe.config.ConfigFactory
 import io.github.embeddedkafka.schemaregistry.{EmbeddedKafka, EmbeddedKafkaConfig}
 import org.scalatest.BeforeAndAfterEach
@@ -14,7 +14,7 @@ import scala.concurrent.duration._
 class KafkaSnapshotStoreTest
     extends SnapshotStoreSpec(
       ConfigFactory.load
-        .withValue("akka.remote.artery.canonical.port", ConfigFactory.parseString("{port: 2555}").getValue("port"))
+        .withValue("pekko.remote.artery.canonical.port", ConfigFactory.parseString("{port: 2555}").getValue("port"))
     )
     with EmbeddedKafka
     with Matchers {

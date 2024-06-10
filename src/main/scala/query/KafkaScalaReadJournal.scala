@@ -1,22 +1,22 @@
 package com.radix.shared.persistence.query
 
-import akka.NotUsed
-import akka.actor.{ActorContext, ActorRef, ExtendedActorSystem}
-import akka.kafka.Metadata.{EndOffsets, GetEndOffsets}
-import akka.kafka.{ConsumerSettings, KafkaConsumerActor, Subscriptions}
-import akka.kafka.scaladsl.Consumer
-import akka.persistence.query.{scaladsl, EventEnvelope, NoOffset}
-import akka.serialization.{Serialization, SerializationExtension}
-import akka.stream.scaladsl.{Keep, Sink, Source}
+import org.apache.pekko.NotUsed
+import org.apache.pekko.actor.{ActorContext, ActorRef, ExtendedActorSystem}
+import org.apache.pekko.kafka.Metadata.{EndOffsets, GetEndOffsets}
+import org.apache.pekko.kafka.{ConsumerSettings, KafkaConsumerActor, Subscriptions}
+import org.apache.pekko.kafka.scaladsl.Consumer
+import org.apache.pekko.persistence.query.{scaladsl, EventEnvelope, NoOffset}
+import org.apache.pekko.serialization.{Serialization, SerializationExtension}
+import org.apache.pekko.stream.scaladsl.{Keep, Sink, Source}
 import com.radix.shared.persistence.{AnySerializedObjectToAvro, KafkaConfig, KafkaJournal, KafkaJournalKey}
 import com.typesafe.config.Config
 import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.TopicPartition
 import org.apache.kafka.common.serialization.{Deserializer, StringDeserializer}
-import akka.pattern.ask
-import akka.stream.Materializer
-import akka.util.Timeout
+import org.apache.pekko.pattern.ask
+import org.apache.pekko.stream.Materializer
+import org.apache.pekko.util.Timeout
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration._

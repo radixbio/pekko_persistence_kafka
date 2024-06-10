@@ -1,8 +1,8 @@
 package com.radix.shared.persistence.test
 
-import akka.actor.{Actor, ActorIdentity, ActorLogging, ActorPath, ActorSystem, Identify, Props}
-import akka.event.{Logging, LoggingAdapter}
-import akka.persistence.PersistentActor
+import org.apache.pekko.actor.{Actor, ActorIdentity, ActorLogging, ActorPath, ActorSystem, Identify, Props}
+import org.apache.pekko.event.{Logging, LoggingAdapter}
+import org.apache.pekko.persistence.PersistentActor
 import com.radix.shared.persistence.AvroSerializer
 
 case class Foo(x: Int)
@@ -15,7 +15,7 @@ class IDActor extends Actor with ActorLogging {
   def receive: PartialFunction[Any, Unit] = {
     case "start" =>
       log.info("Current Actors in system:")
-      self ! ActorPath.fromString("akka://radix")
+      self ! ActorPath.fromString("pekko://radix")
 
     case path: ActorPath =>
       context.actorSelection(path / "*") ! Identify(())

@@ -1,12 +1,12 @@
 package com.radix.shared.persistence
 
 import com.sksamuel.avro4s.{Decoder, Encoder, FieldMapper, SchemaFor}
-import akka.actor.typed.ActorRef
+import org.apache.pekko.actor.typed.ActorRef
 import org.apache.avro.{Schema, SchemaBuilder}
-import akka.actor.{ActorRef => UActorRef, ExtendedActorSystem}
-import akka.actor.typed.scaladsl.adapter._
-import akka.serialization.Serialization
-import akka.stream.{SinkRef, SourceRef, StreamRefResolver}
+import org.apache.pekko.actor.{ActorRef => UActorRef, ExtendedActorSystem}
+import org.apache.pekko.actor.typed.scaladsl.adapter._
+import org.apache.pekko.serialization.Serialization
+import org.apache.pekko.stream.{SinkRef, SourceRef, StreamRefResolver}
 
 object ActorRefSerializer {
   implicit def SchemaForTypedActorRef[T]: SchemaFor[ActorRef[T]] = new SchemaFor[ActorRef[T]] {

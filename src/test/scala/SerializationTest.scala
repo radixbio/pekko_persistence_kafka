@@ -1,11 +1,11 @@
 package com.radix.shared.persistence.test
 
-import akka.actor.testkit.typed.scaladsl.ScalaTestWithActorTestKit
-import akka.actor.typed.ActorRef
-import akka.actor.typed.scaladsl.Behaviors
-import akka.actor.typed.scaladsl.adapter._
-import akka.serialization.{SerializationExtension, SerializerWithStringManifest}
-import akka.testkit.TestKit
+import org.apache.pekko.actor.testkit.typed.scaladsl.ScalaTestWithActorTestKit
+import org.apache.pekko.actor.typed.ActorRef
+import org.apache.pekko.actor.typed.scaladsl.Behaviors
+import org.apache.pekko.actor.typed.scaladsl.adapter._
+import org.apache.pekko.serialization.{SerializationExtension, SerializerWithStringManifest}
+import org.apache.pekko.testkit.TestKit
 import com.radix.shared.persistence.AvroSerializer
 import com.radix.test.RadixSpecConfig
 import org.scalatest.wordspec.AnyWordSpecLike
